@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import bcrypt from "bcrypt-ts";
+import {genSaltSync, hashSync} from "bcrypt-ts";
 
 const UserSchema = new Schema({
     email: { type: String, unique:true, required: [true, ' El correo es obligatorio ' ] }, 
@@ -22,8 +22,8 @@ const UserSchema = new Schema({
 
 UserSchema.post('validate', function(user){
     const notHashedPassword = user.password 
-    const salt = bcrypt.genSaltSync(10);
-    user.password = bcrypt.hashSync(notHashedPassword, salt); 
+    const salt = genSaltSync(10);
+    user.password = hashSync(notHashedPassword, salt); 
 
 })
 
