@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt-ts";
 
 const UserSchema = new Schema({
     email: { type: String, unique:true, required: [true, ' El correo es obligatorio ' ] }, 
