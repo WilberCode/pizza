@@ -3,7 +3,7 @@ import { User } from "../models/User";
 
 export async function POST(req:any, res:any) {
     const body =  await req.json();
-    mongoose.connect(process?.env?.MONGO_URI)
+    mongoose.connect(process.env.MONGO_URI as string )
     const {email} = body; 
     let user = await User.findOne({email});
     if (user) return  Response.json({error:true,message: 'El usuario ya existe'}) 
