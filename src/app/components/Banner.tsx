@@ -12,12 +12,12 @@ const Banner = () => {
                     <p  className="mt-8" >La pizza es la pieza que falta para completar cada día, una alegría de vida sencilla pero deliciosa.</p>
                     <div  className=" inline-flex gap-4 mt-10 " >
               
-                        <Button className="uppercase !font-bold " >PEDIR AHORA<ArrowRightCircleIcon  className="ml-1 w-6" ></ArrowRightCircleIcon> </Button>
-                        <Button  className="bg-white !text-black border-2 !border-black focus:!text-white focus:bg-black hover:!bg-black active:!outline-black focus:outline-black hover:!text-white " >Leer más <ArrowRightCircleIcon  className="ml-1 w-6 " ></ArrowRightCircleIcon> </Button>
+                        <Button className="uppercase !rounded-full !font-bold " >PEDIR AHORA<ArrowRightCircleIcon  className="ml-1 w-6" ></ArrowRightCircleIcon> </Button>
+                        <Button  className="bg-white !text-black border-2 !rounded-full !border-black   focus:!bg-white hover:!bg-black focus:!text-black active:!outline-black focus:outline-black hover:!text-white " >Leer más <ArrowRightCircleIcon  className="ml-1 w-6 " ></ArrowRightCircleIcon> </Button>
                     </div>
                 </div>
                 <div>
-                    <img  className=" animate-[spin_50s_linear_infinite] hover:animate-pulse   " src={'/images/pizza.png'} ></img>
+                    <img  className=" animate-[spin_50s_linear_infinite] hover:animate-pulse" src={'/images/pizza.png'} ></img>
                 </div>
             </div>
         </div>

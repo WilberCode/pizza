@@ -1,5 +1,6 @@
 
 type Props = {
+    type?: "button" | "submit" | "reset";
     className?: string;
     disabled?: boolean;
     children: React.ReactNode;
@@ -7,7 +8,7 @@ type Props = {
     outline?: boolean;
 }
 
-export default function Button({ className = '', disabled, children, size, outline, ...props }:Props) {
+export default function Button({ type="button", className = '',  disabled, children, size, outline, ...props }:Props) {
     let size_class = '';
     switch (size) {
         case "sm":
@@ -36,9 +37,10 @@ export default function Button({ className = '', disabled, children, size, outli
   
     return (
         <button
+            type={type}
             {...props}
             className={
-                `inline-flex items-center ${size_class} rounded-full text-center font-semibold text-base   tracking-wide  active:scale-105  transition ease-in-out duration-150 ${
+                `inline-flex items-center justify-center ${size_class} rounded-xl text-center font-semibold text-base   tracking-wide  active:scale-105  transition ease-in-out duration-150 ${
                     disabled && 'opacity-25'
                 } ` + className
             }
