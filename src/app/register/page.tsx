@@ -6,7 +6,7 @@ import Button from '../components/Button'
 import axios from 'axios'
 import Link from 'next/link'
 
-function page() {
+function Page() {
  const {form,handleChange} =  useForm({email:'',password:''}) 
 
  const [creatingUser, setCreatingUser] = useState<boolean>(false)
@@ -52,4 +52,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
