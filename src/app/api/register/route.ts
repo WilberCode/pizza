@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { User } from "../models/User";  
 
-export async function POST(req, res) {
+export async function POST(req:any, res:any) {
     const body =  await req.json();
     mongoose.connect(process?.env?.MONGO_URI)
     const {email} = body; 
