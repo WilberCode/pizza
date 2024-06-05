@@ -10,9 +10,9 @@ export async function POST(req:any, res:any) {
     try {   
         const createdUser:any = await User.create(body)  
         return Response.json({error:false,message: 'Se registro correctamente!',...createdUser}); 
-    } catch (error) {  
+    } catch (error:any) {  
         if (error?.name === 'ValidationError') {
-            const errors = Object.values(error.errors).map((val) => val.message);
+            const errors = Object.values(error.errors).map((val:any) => val.message);
             return Response.json({error:true,message:  errors[0]})   
         }
     } 
