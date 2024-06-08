@@ -24,6 +24,7 @@ UserSchema.post('validate', function(user){
     const notHashedPassword = user.password 
     const salt = genSaltSync(10);
     user.password = hashSync(notHashedPassword, salt); 
+    
 
 })
 

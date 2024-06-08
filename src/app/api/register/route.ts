@@ -5,7 +5,8 @@ export async function POST(req:any, res:any) {
     const body =  await req.json();
     mongoose.connect(process.env.MONGO_URI as string )
     const {email} = body; 
-    let user = await User.findOne({email});
+    let user = await User.findOne({email}); 
+    
     if (user) return  Response.json({error:true,message: 'El usuario ya existe'}) 
     try {   
         const createdUser:any = await User.create(body)  
