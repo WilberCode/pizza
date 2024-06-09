@@ -11,7 +11,7 @@ import clientPromise  from '../../../lib/mongoConnect';
 
 const handler = NextAuth({
   secret: process.env.SECRET,
-  adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise) as any,
   providers: [
     CredentialsProvider({ 
       name: 'Credentials', 
