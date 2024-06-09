@@ -6,9 +6,10 @@ type Props = {
     children: React.ReactNode;
     size?:'sm' |'md' | 'lg' | 'xl';
     outline?: boolean;
+    onClick?: () => void;
 }
 
-export default function Button({ type="button", className = '',  disabled, children, size, outline, ...props }:Props) {
+export default function Button({ type="button", className = '',  disabled, children, size, outline, onClick, ...props }:Props) {
     let size_class = '';
     switch (size) {
         case "sm":
@@ -45,7 +46,7 @@ export default function Button({ type="button", className = '',  disabled, child
                 } ` + className
             }
             disabled={disabled}
-
+            onClick={onClick}
         >
             {children}
         </button>

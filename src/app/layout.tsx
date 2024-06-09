@@ -5,6 +5,7 @@ import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Providers from "./Providers";
 
 const inter = Inter({ 
   subsets: ["latin"],  
@@ -31,10 +32,12 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${openSans.variable}  ${inter.variable} `}>
       <body  >
-        <ToastContainer /> 
-        <Header />
-          {children}
-        <Footer/>
+        <Providers >   
+          <ToastContainer /> 
+          <Header />
+            {children}
+          <Footer/>
+        </Providers>
         
       </body>
     </html>
