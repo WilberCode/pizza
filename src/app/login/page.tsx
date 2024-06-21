@@ -20,7 +20,7 @@ function Page() {
     const submitRegister = async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         setCreatingUser(true)
-       await signIn('credentials',{...form}) 
+        await signIn('credentials',{...form})  
         
     }
  /*    if (createdUser) {

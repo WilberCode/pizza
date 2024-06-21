@@ -9,7 +9,8 @@ import { compareSync } from "bcrypt-ts";
 import { MongoDBAdapter } from '@auth/mongodb-adapter'; 
 import clientPromise  from '../../../lib/mongoConnect'; 
 
-const handler = NextAuth({
+
+export const authOptions = {
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise) as any,
   providers: [
@@ -49,6 +50,8 @@ const handler = NextAuth({
       }
     })
   ]
-})
+}
+const handler = NextAuth(authOptions)
+ 
 
 export { handler as GET, handler as POST }

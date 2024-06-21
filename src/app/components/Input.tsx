@@ -3,15 +3,17 @@ import { ChangeEvent } from "react";
 type InputProps = {
     handleChange: (e: ChangeEvent<HTMLInputElement>)=>void;
     name:string;
-    value:string|number;
+    value?:string|number;
     placeholder:string | React.JSX.Element;
     type?:string; 
-    disabled?:boolean
+    disabled?:boolean;
+    defaultValue?:string; 
+
 } 
 
-const Input = ({handleChange,name, value, placeholder,type, disabled}:InputProps) => {
+const Input = ({handleChange,name, value, placeholder,type, disabled, defaultValue}:InputProps) => {
 
-  let  input_field =     <input type={type} id={name} name={name} value={value}  onChange={handleChange} disabled={disabled} className={` px-4  ${!value?'bg-primary-500 bg-opacity-5 ':'bg-white'}`}/>
+  let  input_field =     <input type={type} id={name} name={name} value={value} defaultValue={defaultValue}   onChange={handleChange} disabled={disabled} className={` px-4  ${!value?'bg-primary-500 bg-opacity-5 ':'bg-white'}`}/>
   return   (
         <label htmlFor={name}  className="w-full block  " > 
           <span  className="text-sm mb-1 block">{placeholder} </span>  

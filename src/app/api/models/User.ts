@@ -2,6 +2,7 @@ import { Schema, model, models } from "mongoose";
 import {genSaltSync, hashSync} from "bcrypt-ts";
 
 const UserSchema = new Schema({
+    name: { type: String, required: [true, 'El nombre es obligatorio'] },
     email: { type: String, unique:true, required: [true, ' El correo es obligatorio ' ] }, 
     password: { type: String, required: [true, 'La contraseña es requerida'] ,
         validate: { 
