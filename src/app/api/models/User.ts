@@ -5,6 +5,11 @@ const UserSchema = new Schema({
     name: { type: String},
     email: { type: String, unique:true, required: [true, ' El correo es obligatorio ' ] }, 
     image: { type: String},
+    phone: { type: Number},
+    address: { type: String},
+    postalCode: { type: Number},
+    city: { type: String},
+    country: { type: String},
     password: { type: String, required: [true, 'La contraseña es requerida'] ,
         validate: { 
             validator: function(pass:string){  

@@ -9,29 +9,34 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { uploadImage } from "../lib/uploadImage"; 
+import { userProps } from "../../../typings";
  
-type formProps = {
-    name?: string;
-    email?: string;
-    image?: string | null;
-}
+ 
 
 const Page = () => {
 
     const { data: session, status } = useSession();
 
 
-    const {form, setForm,  handleChange } =  useForm<formProps>({name:"",  email:"", image:""})
+    const {form, setForm,  handleChange } =  useForm<userProps>({name:"",  email:"", image:""})
     const [updatingUser, setUpdatingUser] = useState<boolean>(false) 
  
     useEffect(() => {
-        if (status === 'authenticated' && session?.user) { 
-            setForm({
-                ...session.user
-             } as formProps); 
-
+      
+        if (status === 'authenticated' && session?.user) {  
+            getUser() 
         }  
     }, [session, status]); 
+
+     const getUser = ()=>{
+        axios.get('/api/profile').then(res=>{
+            if (res.data.user) {
+                setForm(res.data.user)
+                console.log(res.data.user);
+                
+            }
+        })
+     }
 
     if (status === 'loading') {
         return <div>Loading...</div>
@@ -42,33 +47,56 @@ const Page = () => {
    
     const updateInfo = async(e: FormEvent<HTMLFormElement>) => {
         e.preventDefault() 
-        setUpdatingUser(true)
-        const updatingToast = toast.loading('Actualizando...',{autoClose: 100}) 
-        await axios.put('/api/profile',form).then(res=>{     
-            if (res.data.error) {
-                toast.dismiss(updatingToast)  
-                toast.success(res.data.message,{autoClose: 2000})
-                setUpdatingUser(false)
-            }  
+        setUpdatingUser(true) 
+        
+        const updateUserPromise = axios.put('/api/profile',form).then(res=>{   
+
+            if (!res.data.error) {   
+                setUpdatingUser(false) 
+                getUser()
+            }else{
+                throw new Error("Error al actualizar los datos")
+            }
         }).catch(err=>{  
-            setUpdatingUser(false)
+            setUpdatingUser(false) 
+            throw new Error("Error al actualizar los datos")
+        }) 
+        await toast.promise(updateUserPromise, { 
+            pending: "Actualizando...", 
+            success: {
+                render: "Actualizado con exito",
+                autoClose: 1000, 
+              },
+            error: "Error al actualizar los datos",  
             
-        })
+        }) 
+
     }  
  
     const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files[0]) {
-            const file = files[0]; 
-          try {
-            const url = await uploadImage(file);
-            setForm({
-                ...form,
-                image: url,
-            }); 
-          } catch (error) {
-            console.error("Error al subir la imagen:", error);
-          }
+            const file = files[0];     
+            const uploadImagePromise  =  uploadImage(file).then(url=>{ 
+                if (url) {
+                    setForm({
+                        ...form,
+                        image: url,
+                    }); 
+                } 
+            }).catch(error=>{
+                throw new Error("Error al subir la imagen")
+            }) 
+
+            await toast.promise(uploadImagePromise, { 
+                pending: "Subiendo la imagen...", 
+                success: {
+                    render: "Imagen subida exitosamente",
+                    autoClose: 1000, 
+                  },
+                error: "Error al subir la imagen",  
+                
+            }) 
         }
       };
     
@@ -112,7 +140,22 @@ const Page = () => {
                            <form onSubmit={updateInfo}  >
                                 <Input handleChange={handleChange} type="text" placeholder="Nombre" name="name"  value={ form.name } disabled={updatingUser} />
                                 <div  className="mt-3" >
-                                    <Input handleChange={handleChange} type="email" placeholder="Correo" name="email"   value={form.email} disabled/>   
+                                    <Input handleChange={handleChange} type="email" placeholder="Correo" name="email"   value={form.email} disabled />   
+                                </div>
+                             <div  className="mt-3 " >
+                                    <Input handleChange={handleChange} type="number" placeholder="Teléfono" name="phone"   value={form?.phone || ""}  />   
+                                     
+                                </div>    
+                                <div  className="mt-3" >   
+                                    <Input handleChange={handleChange} type="text" placeholder="Dirección" name="address"   value={form?.address || ""}  />   
+                                </div> 
+
+                                <div  className="mt-3 grid  grid-cols-2 gap-3 " >  
+                                    <Input handleChange={handleChange} type="number" placeholder="Código postal" name="postalCode"   value={form?.postalCode ||""}  />   
+                                    <Input handleChange={handleChange} type="text" placeholder="Ciudad" name="city"   value={form?.city||""}  />   
+                                </div>  
+                                <div  className="mt-3" >
+                                    <Input handleChange={handleChange} type="text" placeholder="Páis" name="country"   value={form?.country||""}  />   
                                 </div>
                                 <Button type="submit"  className="w-full mt-3" disabled={updatingUser} >Guardar cambios</Button>
                            </form>  
