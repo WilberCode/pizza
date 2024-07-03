@@ -1,10 +1,8 @@
  
 import { useState } from "react";
+import { Property } from "../../../typings";
 
-type Property = {
-  name: string;
-  price: string;
-}; 
+ 
 const useProperties = <T extends Property[]>(initialState: T ) => {
   const [properties, setProperties] = useState(initialState);
  
