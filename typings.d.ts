@@ -9,4 +9,27 @@ export type userProps = {
     postalCode?: number;
     city?: string;
     country?: string;
+    admin?: boolean;
 } 
+
+
+export type CategoryProps = {
+    name:string;
+    slug?:string;
+    _id?:string;
+}
+
+type Property = {
+    name: string;
+    price: string;
+};
+
+type MenuProps = {
+    name:string;
+    description:string;
+    price:number;
+    image?: string | null; 
+    sizes?: Property[];
+    extraIngredientPrices?: Property[];
+    _id?: string;
+}  

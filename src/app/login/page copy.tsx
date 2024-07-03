@@ -1,7 +1,7 @@
 "use client"
 import React, { use, useEffect, useState } from 'react'
 import Input from '../components/Input'
-import useForm from '../hook/useForm'
+import useForm from '../hooks/useForm'
 import Button from '../components/Button'
 import axios from 'axios'
 import Link from 'next/link'

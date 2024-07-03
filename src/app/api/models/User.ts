@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     postalCode: { type: Number},
     city: { type: String},
     country: { type: String},
+    admin: { type: Boolean},
     password: { type: String, required: [true, 'La contraseña es requerida'] ,
         validate: { 
             validator: function(pass:string){  

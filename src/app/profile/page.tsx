@@ -2,48 +2,55 @@
 import { useSession } from "next-auth/react"
 import Button from "../components/Button"; 
 import Input from "../components/Input";
-import useForm from "../hook/useForm"; 
+import useForm from "../hooks/useForm"; 
 import { ChangeEvent, FormEvent,  useEffect, useState } from "react"; 
 import { redirect } from "next/navigation"; 
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { uploadImage } from "../lib/uploadImage"; 
-import { userProps } from "../../../typings";
+import { userProps } from "../../../typings"; 
+import UserTabs from "../components/UserTabs";
+import useProfile from "../hooks/useProfile";
  
- 
+
 
 const Page = () => {
 
     const { data: session, status } = useSession();
 
-
+ 
     const {form, setForm,  handleChange } =  useForm<userProps>({name:"",  email:"", image:""})
     const [updatingUser, setUpdatingUser] = useState<boolean>(false) 
+
+
+ 
  
     useEffect(() => {
       
         if (status === 'authenticated' && session?.user) {  
             getUser() 
+           
         }  
     }, [session, status]); 
 
      const getUser = ()=>{
         axios.get('/api/profile').then(res=>{
             if (res.data.user) {
-                setForm(res.data.user)
-                console.log(res.data.user);
+                setForm(res.data.user) 
                 
             }
         })
      }
-
+   
+    
     if (status === 'loading') {
         return <div>Loading...</div>
     }
     if (status === 'unauthenticated') {
         return  redirect('/login')
     } 
+   
    
     const updateInfo = async(e: FormEvent<HTMLFormElement>) => {
         e.preventDefault() 
@@ -105,8 +112,9 @@ const Page = () => {
 
             <main>
                 <div className="container">
-                    <div className="flex max-w-[600px] mx-auto gap-6 py-10 ">
-                        <div className=" ">  
+                    {form?.admin && <UserTabs admin={form?.admin||false}/> } 
+                    <div className="flex max-md:flex-col max-w-[600px] mx-auto gap-6 py-10 ">
+                        <div className="flex justify-center ">  
                                 <div className="  " >  
                                    <div  className="relative group   bg-gray-200  w-[150px]  h-[150px]   rounded-lg overflow-hidden border border-gray-200" >   
                                             {form.image && ( 

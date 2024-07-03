@@ -24,8 +24,8 @@ export async function GET(req:any, res:any) {
   
    if (emailForFind) {   
         const user  = await  User.findOne({email:emailForFind});     
-        const { name, email, image, phone, address, postalCode, city, country } = user;
-        return  Response.json({user:{ name, email, image, phone, address, postalCode, city, country }})  
+        const { name, email, image, phone, address, postalCode, city, country, admin } = user;
+        return  Response.json({user:{ name, email, image, phone, address, postalCode, city, country, admin }})  
     }   
    return Response.json({error:true,message: 'No fue actualizado el usuario '}) 
     
