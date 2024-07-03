@@ -31,5 +31,6 @@ type MenuProps = {
     image?: string | null; 
     sizes?: Property[];
     extraIngredientPrices?: Property[];
+    category?: string;
     _id?: string;
 }  
