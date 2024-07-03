@@ -24,13 +24,13 @@ const FormMenu = ({menu}:{menu?:MenuProps}) => {
     name:"",
     description:"",
     price:0,   
-  })   
+  })    
 
 
   const {categories} = useCategories()
   const [category, setCategory] = useState(menu?.category || '') 
 
-/* console.log(sizes);
+/* console.log(sizes); 
  */
 
   useEffect(() => {
