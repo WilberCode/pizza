@@ -19,13 +19,13 @@ export type CategoryProps = {
     _id?:string;
 }
 
-type Property = {
+export type Property = {
     name: string;
     price: string;
     _id?: string;
 }; 
 
-type MenuProps = {
+export type MenuProps = {
     name:string;
     description:string;
     price:number;
