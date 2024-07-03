@@ -3,7 +3,7 @@ import useForm from "../hooks/useForm"
 import Input from "../components/Input";
 import Button from "../components/Button"; 
 import axios from "axios";
-import { MenuProps, Property } from "../../../typings";
+import { MenuProps } from "../../../typings";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { uploadImage } from "@/app/lib/uploadImage"; 
