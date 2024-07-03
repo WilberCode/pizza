@@ -23,7 +23,7 @@ type Property = {
     name: string;
     price: string;
     _id?: string;
-};
+}; 
 
 type MenuProps = {
     name:string;
