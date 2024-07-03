@@ -30,8 +30,8 @@ export type MenuProps = {
     description:string;
     price:number;
     image?: string | null; 
-    sizes?: Property[];
-    extraIngredientPrices?: Property[];
+    sizes?: Property[] | null;
+    extraIngredientPrices?: Property[] | null;
     category?: string;
     _id?: string;
 }  

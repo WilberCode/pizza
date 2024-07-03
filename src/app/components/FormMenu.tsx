@@ -17,8 +17,8 @@ const FormMenu = ({menu}:{menu?:MenuProps}) => {
    const router = useRouter() 
   const [savingMenu, setSavingMenu] = useState<boolean>(false)  
   
-  const [sizes, setSizes] = useState<Property[]>(menu?.sizes || [])
-  const [extraIngredientPrices, setExtraIngredientPrices] = useState<Property[]>(menu?.extraIngredientPrices || []) 
+  const [sizes, setSizes] = useState(menu?.sizes || [])
+  const [extraIngredientPrices, setExtraIngredientPrices] = useState(menu?.extraIngredientPrices || []) 
    
   const {form,handleChange,setForm} = useForm<MenuProps>({
     name:"",
