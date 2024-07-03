@@ -22,7 +22,7 @@ export type CategoryProps = {
 export type Property = {
     name: string;
     price: string;
-    _id: string;
+    _id?: string;
 }; 
 
 export type MenuProps = {
