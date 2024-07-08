@@ -37,3 +37,7 @@ yarn-error.log*
 next-env.d.ts
 
 .code.tsx
+
+jest.config.ts
+jest.setup.ts
+src/app/__tests__/

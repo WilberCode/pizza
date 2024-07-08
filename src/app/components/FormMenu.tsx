@@ -3,7 +3,7 @@ import useForm from "../hooks/useForm"
 import Input from "../components/Input";
 import Button from "../components/Button"; 
 import axios from "axios";
-import { MenuProps } from "../../../typings";
+import { MenuProps, Property } from "../../../typings";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { uploadImage } from "@/app/lib/uploadImage"; 
@@ -17,8 +17,8 @@ const FormMenu = ({menu}:{menu?:MenuProps}) => {
    const router = useRouter() 
   const [savingMenu, setSavingMenu] = useState<boolean>(false)  
   
-  const [sizes, setSizes] = useState(menu?.sizes || [])
-  const [extraIngredientPrices, setExtraIngredientPrices] = useState(menu?.extraIngredientPrices || []) 
+  const [sizes, setSizes] = useState<Property[]>(menu?.sizes || [])
+  const [extraIngredientPrices, setExtraIngredientPrices] = useState<Property[]>(menu?.extraIngredientPrices || []) 
    
   const {form,handleChange,setForm} = useForm<MenuProps>({
     name:"",
