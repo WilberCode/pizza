@@ -3,7 +3,7 @@ import useForm from "../hooks/useForm"
 import Input from "../components/Input";
 import Button from "../components/Button"; 
 import axios from "axios";
-import { MenuProps, Property } from "../../../typings";
+import { CategoryProps, MenuProps, Property } from "../../../typings";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { uploadImage } from "@/app/lib/uploadImage"; 
@@ -210,9 +210,9 @@ const FormMenu = ({menu}:{menu?:MenuProps}) => {
                                 <div  className="mt-3 " >
                                      <label htmlFor="category" >
                                         <span className="text-sm mb-1 block"  >Categoría</span> 
-                                        <select onChange={(e)=>setCategory(e.target.value)}  value={category}  id="category"  className={`px-3 py-2 border  border-gray-400 rounded-lg w-full ${categories.some(c=> c?._id === category)?'bg-gray-100':'bg-white'}`}  >
+                                        <select onChange={(e)=>setCategory(e.target.value)}  value={category}  id="category"  className={`px-3 py-2 border  border-gray-400 rounded-lg w-full ${categories?.some((c:CategoryProps) => c?._id === category)?'bg-gray-100':'bg-white'}`}  >
                                             <option value="" >Ninguno</option> 
-                                            {!!categories.length && categories?.map((category,i) =>( 
+                                            {!!categories.length && categories?.map((category:CategoryProps,i) =>( 
                                                 <option   key={i} value={category?._id}>{category?.name}</option>  
                                             ) )} 
                                         </select>
