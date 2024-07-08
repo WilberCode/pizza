@@ -37,11 +37,11 @@ const FormMenu = ({menu}:{menu?:MenuProps}) => {
  
     if (menu) {
         const {sizes, extraIngredientPrices,...menuData} = menu  
-        setForm({...form, ...menuData})    
+        setForm(prevForm =>({...prevForm, ...menuData}))    
     } 
    
 
-  }, [menu])
+  }, [menu, setForm])
   const saveMenu = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault() 
     console.log(sizes);
